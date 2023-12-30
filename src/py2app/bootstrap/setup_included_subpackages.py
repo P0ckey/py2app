@@ -1,4 +1,4 @@
-import imp
+import importlib
 import os
 import sys
 import types
@@ -18,9 +18,7 @@ class Loader:
         pkg_dir = os.path.join(
             os.environ["RESOURCEPATH"], "lib", "python%d.%d" % (sys.version_info[:2])
         )
-        return imp.load_module(
-            fullname, None, os.path.join(pkg_dir, fullname), ("", "", imp.PKG_DIRECTORY)
-        )
+        return importlib.util.spec_from_file_location ( fullname, os.path.join(pkg_dir, fullname))
 
 
 class Finder:
